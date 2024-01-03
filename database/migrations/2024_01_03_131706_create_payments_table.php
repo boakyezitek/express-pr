@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->date('payment_date');
+            $table->integer('payment_amount');
+            $table->text('memo');
+            $table->string('payment_form_number');
+            $table->date('date_deposited');
+            $table->date('date_confirmed');
+            $table->foreignId('confirmed_by')->constrained('staff');
+            $table->foreignId('tenant_id')->index();
+            $table->foreignId('property_id')->index();
+            $table->foreignId('created_by')->constrained('staff');
+            $table->foreignId('form_of_payment_id')->index();
+            $table->text('payment_received')->nullable();
             $table->timestamps();
         });
     }

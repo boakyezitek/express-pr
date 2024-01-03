@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('expeneses', function (Blueprint $table) {
             $table->id();
+            $table->date('date_paid');
+            $table->text('description');
+            $table->integer('expense_amount');
+            $table->foreignId('expenses_category_id')->index();
+            $table->tinyInteger('is_reimbursement_necessary')->default(1);
+            $table->date('reimbursement_date')->nullable();
+            $table->foreignId('paid_by')->constrained('staff');
+            $table->foreignId('paid_to')->constrained('vendor');
+            $table->foreignId('property_id')->index();
+            $table->foreignId('created_by')->constrained('staff');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

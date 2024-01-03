@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->string('report_id');
+            $table->foreignId('client_id')->index();
+            $table->string('month_year');
             $table->timestamps();
         });
     }

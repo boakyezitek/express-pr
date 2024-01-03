@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->index();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->string('phone');
+            $table->tinyInteger('staff_type')->default(1);
+            $table->boolean('is_visible_on_website')->default(false);
             $table->timestamps();
         });
     }

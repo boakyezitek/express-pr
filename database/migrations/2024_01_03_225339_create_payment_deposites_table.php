@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('payment_deposites', function (Blueprint $table) {
             $table->id();
+            $table->morphs('deposite_by');
             $table->timestamps();
+            
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('payment_deposites');
     }
 };
