@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('zipcode');
-            $table->string('state');
             $table->tinyInteger('furnished')->default(1);
             $table->tinyInteger('featured');
             $table->tinyInteger('parking_spaces')->default(1);
@@ -63,7 +62,7 @@ return new class extends Migration
             $table->foreignId('property_id')->index();
             $table->foreignId('property_type_item_id')->index();
 
-            $table->unique(['proeprty_id', 'property_type_item_id']);
+            $table->unique(['property_id', 'property_type_item_id']);
         });
 
         Schema::create('property_parking_type', function(Blueprint $table) {

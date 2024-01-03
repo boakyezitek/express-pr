@@ -20,7 +20,7 @@ return new class extends Migration
             $table->tinyInteger('is_reimbursement_necessary')->default(1);
             $table->date('reimbursement_date')->nullable();
             $table->foreignId('paid_by')->constrained('staff');
-            $table->foreignId('paid_to')->constrained('vendor');
+            $table->foreignId('paid_to')->constrained('vendors');
             $table->foreignId('property_id')->index();
             $table->foreignId('created_by')->constrained('staff');
             $table->softDeletes();
