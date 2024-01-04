@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone');
             $table->tinyInteger('staff_type')->default(1);
             $table->boolean('is_visible_on_website')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

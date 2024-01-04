@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('state');
             $table->string('zipcode');
             $table->integer('active_properties')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
