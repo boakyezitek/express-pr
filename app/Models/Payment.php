@@ -14,42 +14,81 @@ class Payment extends Model
 {
     use HasFactory, SoftDeletes;
 
+    /**
+     * Define how certain attributes are cast when retrieved from the database.
+     * In this case, cast 'payment_amount' attribute to an integer.
+     */
     protected $cast = [
         'payment_amount' => 'integer',
     ];
 
-    public function confirmedBy():BelongsTo
+    /**
+     * Define a BelongsTo relationship with the Staff model for the staff who confirmed the payment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function confirmedBy(): BelongsTo
     {
         return $this->belongsTo(Staff::class, 'confirmed_by');
     }
 
-    public function tenant():BelongsTo
+    /**
+     * Define a BelongsTo relationship with the Tenant model for the tenant associated with the payment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tenant(): BelongsTo
     {
         return $this->belongsTo(Tenant::class);
     }
 
-    public function createdBy():BelongsTo
+    /**
+     * Define a BelongsTo relationship with the Staff model for the staff who created the payment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(Staff::class, 'created_by');
     }
 
-    public function property():BelongsTo
+    /**
+     * Define a BelongsTo relationship with the Property model for the property associated with the payment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function property(): BelongsTo
     {
-        return $this->belongsTo(Staff::class, 'created_by');
+        return $this->belongsTo(Property::class, 'property_id');
     }
 
-    public function formOfPayment():HasOne
+    /**
+     * Define a HasOne relationship with the FormOfPayment model for the payment's form of payment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function formOfPayment(): HasOne
     {
         return $this->hasOne(FormOfPayment::class);
     }
 
-    public function proofOfPayment():MorphMany
+    /**
+     * Define a MorphMany relationship with the Document model for the proof of payment associated with the payment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function proofOfPayment(): MorphMany
     {
         return $this->morphMany(Document::class, 'resource');
     }
 
-    public function DepositeBy():MorphTo
+    /**
+     * Define a MorphTo relationship for the entity that made the deposit associated with the payment.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function DepositeBy(): MorphTo
     {
-        return $this->morphTo(PaymentDeposite::class, 'deposite_by');
+        return $this->morphTo('deposite_by');
     }
 }

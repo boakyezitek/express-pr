@@ -10,7 +10,13 @@ class PaymentDeposite extends Model
 {
     use HasFactory;
 
-    public function depositeBy():MorphTo
+    /**
+     * Define a MorphTo relationship for the entity that made the deposit associated with the payment.
+     * This method is used to associate the model with any type of entity using polymorphic relations.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function depositeBy(): MorphTo
     {
         return $this->morphTo();
     }

@@ -9,6 +9,9 @@ class ExpensesCategory extends Model
 {
     use HasFactory;
 
-    CONST NORMAL_EXPENSES = 1;
-    CONST PAYMENT_FOR_ESCROW = 2;
+    /**
+     * Constants for different expense types.
+     */
+    const NORMAL_EXPENSES = 1;
+    const PAYMENT_FOR_ESCROW = 2;
 }

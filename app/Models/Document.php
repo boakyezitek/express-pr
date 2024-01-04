@@ -10,9 +10,14 @@ class Document extends Model
 {
     use HasFactory;
 
-    public function resource():MorphTo
+    /**
+     * Define a MorphTo relationship for the resource.
+     * This method is used to associate the model with any type of resource using polymorphic relations.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function resource(): MorphTo
     {
         return $this->morphTo();
     }
-
 }

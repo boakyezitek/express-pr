@@ -9,6 +9,9 @@ class PaymentCategory extends Model
 {
     use HasFactory;
 
-    CONST NORMAL_PAYMENT = 1;
-    CONST PAYMENT_FOR_ESCROW = 2;
+    /**
+     * Constants for different payment categories.
+     */
+    const NORMAL_PAYMENT = 1;
+    const PAYMENT_FOR_ESCROW = 2;
 }

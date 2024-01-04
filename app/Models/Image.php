@@ -10,9 +10,14 @@ class Image extends Model
 {
     use HasFactory;
 
-    public function image():MorphTo
+    /**
+     * Define a MorphTo relationship for the image.
+     * This method is used to associate the model with any type of image using polymorphic relations.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function image(): MorphTo
     {
         return $this->morphTo();
     }
-
 }

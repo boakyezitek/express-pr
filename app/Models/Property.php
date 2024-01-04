@@ -13,25 +13,30 @@ class Property extends Model
 {
     use HasFactory, SoftDeletes;
 
-    CONST FURNISHED_NO = 1;
-    CONST FURNISHED_YES = 2;
+    /**
+     * Constants for property attributes.
+     */
+    const FURNISHED_NO = 1;
+    const FURNISHED_YES = 2;
 
-    CONST FEATURED_NO = 1;
-    CONST FEATURED_YES = 2;
+    const FEATURED_NO = 1;
+    const FEATURED_YES = 2;
 
-    CONST PARKING_NO = 1;
-    CONST PARKING_YES = 2;
-    CONST PARKING_AVAILABLE_FOR_RENT = 3;
+    const PARKING_NO = 1;
+    const PARKING_YES = 2;
+    const PARKING_AVAILABLE_FOR_RENT = 3;
 
-    CONST IS_LEASE_NO = 1;
-    CONST IS_LEASE_YES = 2;
+    const IS_LEASE_NO = 1;
+    const IS_LEASE_YES = 2;
 
-    CONST PROPERTY_AVAILABLE = 1;
-    CONST PROPERTY_MAINTAINACE = 2;
-    CONST PROPERTY_RENTED = 3;
-    CONST PROPERTY_CANCELLED = 4;
+    const PROPERTY_AVAILABLE = 1;
+    const PROPERTY_MAINTENANCE = 2;
+    const PROPERTY_RENTED = 3;
+    const PROPERTY_CANCELLED = 4;
 
-
+    /**
+     * Define how certain attributes are cast when retrieved from the database.
+     */
     protected $cast = [
         'monthly_rent_wanted' => 'integer',
         'min_security_deposit' => 'integer',
@@ -51,39 +56,72 @@ class Property extends Model
         'status' => 'integer',
     ];
 
-
-    public function createdBy():BelongsTo
+    /**
+     * Define a BelongsTo relationship with the Staff model for the staff who created the property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(Staff::class, 'created_by');
     }
 
-    public function client():BelongsTo
+    /**
+     * Define a BelongsTo relationship with the Client model for the client associated with the property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
 
-
-    public function propertyAmenity():BelongsToMany
+    /**
+     * Define a BelongsToMany relationship with the AmenityItem model for property amenities.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function propertyAmenity(): BelongsToMany
     {
         return $this->belongsToMany(AmenityItem::class, 'amenity_item_id');
     }
 
-    public function propertyUtilityIncluded():BelongsToMany
+    /**
+     * Define a BelongsToMany relationship with the UtilityItem model for utility items included with the property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function propertyUtilityIncluded(): BelongsToMany
     {
         return $this->belongsToMany(UtilityItem::class, 'utility_item_id');
     }
 
-    public function propertyType():BelongsTo
+    /**
+     * Define a BelongsTo relationship with the PropertyTypeItem model for the type of property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function propertyType(): BelongsTo
     {
         return $this->belongsTo(PropertyTypeItem::class, 'property_type_item_id');
     }
 
-    public function propertyParkingType():BelongsToMany
+    /**
+     * Define a BelongsToMany relationship with the ParkingItem model for parking types associated with the property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function propertyParkingType(): BelongsToMany
     {
         return $this->belongsToMany(ParkingItem::class, 'parking_item_id');
     }
 
-    public function images():MorphMany
+    /**
+     * Define a MorphMany relationship with the Image model for images associated with the property.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'image');
     }

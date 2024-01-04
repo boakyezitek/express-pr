@@ -12,30 +12,57 @@ class Expenese extends Model
 {
     use HasFactory, SoftDeletes;
 
-    CONST REIMBURSEMENT_NO = 1;
-    CONST REIMBURSEMENT_YES = 2;
+    /**
+     * Constants for reimbursement status.
+     */
+    const REIMBURSEMENT_NO = 1;
+    const REIMBURSEMENT_YES = 2;
 
+    /**
+     * Define how certain attributes are cast when retrieved from the database.
+     * In this case, cast 'expense_amount' and 'is_reimbursement_necessary' attributes to integers.
+     */
     protected $cast = [
         'expense_amount' => 'integer',
         'is_reimbursement_necessary' => 'integer',
     ];
 
-    public function createdBy():BelongsTo
+    /**
+     * Define a BelongsTo relationship with the Staff model for the creator of the expense.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(Staff::class, 'created_by');
     }
 
-    public function paidBy():BelongsTo
+    /**
+     * Define a BelongsTo relationship with the Staff model for the person who paid the expense.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function paidBy(): BelongsTo
     {
         return $this->belongsTo(Staff::class, 'paid_by');
     }
 
-    public function paidTo():BelongsTo
+    /**
+     * Define a BelongsTo relationship with the Vendor model for the entity to which the expense is paid.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function paidTo(): BelongsTo
     {
         return $this->belongsTo(Vendor::class, 'paid_to');
     }
 
-    public function proofOfPayment():MorphMany
+    /**
+     * Define a MorphMany relationship with the Document model for the proof of payment associated with the expense.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function proofOfPayment(): MorphMany
     {
         return $this->morphMany(Document::class, 'resource');
     }

@@ -9,6 +9,9 @@ class FormOfPayment extends Model
 {
     use HasFactory;
 
-    CONST PHYSICAL = 1;
-    CONST ELECTRONIC = 2;
+    /**
+     * Constants for different forms of payment.
+     */
+    const PHYSICAL = 1;
+    const ELECTRONIC = 2;
 }
