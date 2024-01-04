@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Staff;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,12 @@ class StaffFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'first_name' => $this->faker->firstName($gender = null|'male'|'female'),
+            'last_name' => $this->faker->lastName(),
+            'email' => $this->faker->freeEmail(),
+            'phone' => $this->faker->phoneNumber(),
+            'staff_type' => Staff::MANAGER,
+            'is_visible_on_website' => true,
         ];
     }
 }
