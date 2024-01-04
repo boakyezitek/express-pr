@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('state');
             $table->string('zipcode');
             $table->tinyInteger('furnished')->default(1);
-            $table->tinyInteger('featured');
+            $table->tinyInteger('featured')->default(1);
             $table->tinyInteger('parking_spaces')->default(1);
             $table->string('parking_number')->nullable();
             $table->integer('parking_fees')->nullable();
@@ -39,6 +39,7 @@ return new class extends Migration
             $table->decimal('lat', 11, 8);
             $table->decimal('lng', 11, 8);
             $table->tinyInteger('status')->default(1);
+            $table->foreignId('client_id')->index();
             $table->foreignId('created_by')->constrained('staff');
             $table->softDeletes();
             $table->timestamps();

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('phone');
-            $table->tinyInteger('staff_type')->default(1);
+            $table->tinyInteger('staff_type')->default(3);
             $table->boolean('is_visible_on_website')->default(false);
             $table->softDeletes();
             $table->timestamps();
