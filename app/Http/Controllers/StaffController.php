@@ -140,7 +140,7 @@ class StaffController extends Controller
             'first_name' => [Rule::when($staff->exists, 'sometimes'), 'required', 'string'],
             'last_name' => [Rule::when($staff->exists, 'sometimes'), 'required', 'string'],
             'email' => [Rule::when($staff->exists, 'sometimes'), 'required', 'email'],
-            'phone' => [Rule::when($staff->exists, 'sometimes'), 'required', 'regex:/^(\+\d{1,3}[- ]?)?\d{10,}$/'],
+            'phone' => [Rule::when($staff->exists, 'sometimes'), 'required'],
             'staff_type' => [Rule::when($staff->exists, 'sometimes'), 'required', 'numeric', 'in:1,2,3'],
         ])->validate();
 

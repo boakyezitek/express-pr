@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -48,9 +49,14 @@ class Client extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
-    public function pitureId(): MorphOne
+    public function pictureId(): MorphOne
     {
         return $this->morphOne(Image::class, 'image');
+    }
+
+    public function properties():HasMany
+    {
+        return $this->hasMany(Property::class);
     }
 
 }

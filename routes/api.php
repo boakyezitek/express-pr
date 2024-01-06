@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\TenantController;
+use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +27,14 @@ Route::post('/staff', [StaffController::class, 'create'])->middleware(['auth:san
 Route::put('/staff/{staff}', [StaffController::class, 'update'])->middleware(['auth:sanctum']);
 Route::delete('/staff/{staff}', [StaffController::class, 'destroy'])->middleware(['auth:sanctum']);
 
+Route::get('/clients', [ClientController::class, 'index'])->middleware(['auth:sanctum']);
+Route::get('/clients/{client}', [ClientController::class, 'show'])->middleware(['auth:sanctum']);
+Route::post('/clients', [ClientController::class, 'create'])->middleware(['auth:sanctum']);
+Route::put('/clients/{client}', [ClientController::class, 'update'])->middleware(['auth:sanctum']);
+Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->middleware(['auth:sanctum']);
+
+Route::get('/tenants', [TenantController::class, 'index'])->middleware(['auth:sanctum']);
+Route::get('/tenants/{tenant}', [TenantController::class, 'show'])->middleware(['auth:sanctum']);
+Route::post('/tenants', [TenantController::class, 'create'])->middleware(['auth:sanctum']);
+Route::put('/tenants/{tenant}', [TenantController::class, 'update'])->middleware(['auth:sanctum']);
+Route::delete('/tenants/{tenant}', [TenantController::class, 'destroy'])->middleware(['auth:sanctum']);
