@@ -45,12 +45,7 @@ class TenantTest extends TestCase
         $this->assertNotNull($response->json('meta'));
     }
 
-    /**
-     *
-     *@test
-    */
-
-    public function test_application_can_load_single_tenant()
+    public function test_application_can_load_single_tenant(): void
     {
         $user = User::factory()->create();
         Staff::factory()->create(['user_id' => $user->id]);
@@ -67,11 +62,6 @@ class TenantTest extends TestCase
 
         $response->assertOk();
     }
-
-
-        /**
-     * @test
-     */
 
      public function test_application_can_create_tenant(): void
      {
@@ -103,11 +93,6 @@ class TenantTest extends TestCase
         ->assertJsonPath('data.zipcode', '80459-7217');
      }
 
-
-
-    /**
-     * @test
-    */
     public function test_application_can_update_tenant(): void
     {
        $user = User::factory()->create();
@@ -135,9 +120,6 @@ class TenantTest extends TestCase
        ->assertJsonPath('data.zipcode', '80459-7217');
     }
 
-   /**
-    * @test
-   */
 
    public function test_application_can_delete_tenant(): void
    {

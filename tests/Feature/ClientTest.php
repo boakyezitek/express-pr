@@ -17,10 +17,6 @@ class ClientTest extends TestCase
 {
     use LazilyRefreshDatabase;
 
-    /**
-     * @test
-     */
-
     public function test_application_can_load_all_clients_in_paginated_manner(): void
     {
         $user = User::factory()->create();
@@ -48,10 +44,6 @@ class ClientTest extends TestCase
         $this->assertNotNull($response->json('meta'));
     }
 
-    /**
-     * @test
-     */
-
      public function test_application_can_load_single_client(): void
      {
         $user = User::factory()->create();
@@ -70,9 +62,7 @@ class ClientTest extends TestCase
         $response->assertOk();
      }
 
-    /**
-     * @test
-    */
+
      public function test_application_can_load_single_client_with_property_count(): void
      {
         $user = User::factory()->create();
@@ -111,9 +101,6 @@ class ClientTest extends TestCase
         $response->assertOk();
      }
 
-    /**
-     * @test
-     */
 
      public function test_application_can_create_client(): void
      {
@@ -145,9 +132,6 @@ class ClientTest extends TestCase
         ->assertJsonPath('data.zipcode', '80459-7217');
      }
 
-    /**
-     * @test
-    */
      public function test_application_can_update_client(): void
      {
         $user = User::factory()->create();
@@ -174,10 +158,6 @@ class ClientTest extends TestCase
         ->assertJsonPath('data.state', 'Connecticut')
         ->assertJsonPath('data.zipcode', '80459-7217');
      }
-
-    /**
-     * @test
-    */
 
     public function test_application_can_delete_client(): void
     {

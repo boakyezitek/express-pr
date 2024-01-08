@@ -14,9 +14,7 @@ use Tests\TestCase;
 class StaffTest extends TestCase
 {
     use LazilyRefreshDatabase;
-    /**
-     * @test
-     */
+
     public function test_application_can_list_all_staff_in_paginated_manner(): void
     {
         $user = User::factory()->create();
@@ -52,9 +50,6 @@ class StaffTest extends TestCase
 
     }
 
-    /**
-     * @test
-     */
     public function test_application_can_list_all_manager_in_paginated_manner(): void
     {
         $user = User::factory()->create();
@@ -90,9 +85,6 @@ class StaffTest extends TestCase
 
     }
 
-    /**
-     * @test
-     */
     public function test_application_can_list_all_staff_member_in_paginated_manner(): void
     {
         $user = User::factory()->create();
@@ -128,9 +120,6 @@ class StaffTest extends TestCase
     }
 
 
-    /**
-     * @test
-     */
     public function test_application_can_list_all_staff_visible_on_website(): void
     {
 
@@ -166,9 +155,6 @@ class StaffTest extends TestCase
         $this->assertNotNull($response->json('data'));
     }
 
-    /**
-     * @test
-     */
     public function test_application_can_list_all_staff_with_avatar(): void
     {
         $user = User::factory()->create();
@@ -205,12 +191,8 @@ class StaffTest extends TestCase
         $this->assertNotNull($response->json('meta'));
     }
 
-    /**
-     * @test
-     *
-    */
 
-    public function test_application_can_show_single_staff_with_avatar_and_account()
+    public function test_application_can_show_single_staff_with_avatar_and_account(): void
     {
         $user = User::factory()->create();
         Staff::factory()->create([
@@ -238,11 +220,8 @@ class StaffTest extends TestCase
 
     }
 
-    /**
-     * @test
-    */
 
-    public function test_application_can_create_new_staff()
+    public function test_application_can_create_new_staff(): void
     {
         $user = User::factory()->create();
         Staff::factory()->create([
@@ -274,12 +253,7 @@ class StaffTest extends TestCase
     }
 
 
-    /**
-     * @test
-     *
-     * */
-
-    public function test_application_can_update_staff()
+    public function test_application_can_update_staff(): void
     {
         $user = User::factory()->create();
         Staff::factory()->create([
@@ -313,12 +287,7 @@ class StaffTest extends TestCase
     }
 
 
-        /**
-     * @test
-     *
-     * */
-
-     public function test_application_can_delete_staff()
+     public function test_application_can_delete_staff(): void
      {
          Storage::put('/avatar.png', 'empty');
 
@@ -349,8 +318,6 @@ class StaffTest extends TestCase
          $this->assertModelMissing($avatar);
 
          Storage::assertMissing('avatar.png');
-
-
 
      }
 
