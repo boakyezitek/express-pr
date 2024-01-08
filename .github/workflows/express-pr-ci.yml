@@ -1,8 +1,8 @@
-name: GitHub Actions Demo
+name: Express PR Actions
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  Lint:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -16,7 +16,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
-          tools: laravel/pint
+          # tools: laravel/pint
 
       - uses: overtrue/phplint@8.1
         with:

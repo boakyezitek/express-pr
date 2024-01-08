@@ -36,7 +36,7 @@ class TenantTest extends TestCase
 
         $response = $this->get('/api/tenants');
 
-        $response->assertOk()->dump();
+        $response->assertOk();
         $response->assertJsonStructure(['data' => [['id']]]);
         $response->assertJsonCount(10, 'data');
 
