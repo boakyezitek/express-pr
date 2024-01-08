@@ -2,35 +2,26 @@ name: Express PR Actions
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  lint:
+  Lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php-version: ['8.1', '8.2']
     steps:
-      - name: 🎉 Triggered by ${{ github.event_name }}
-        run: echo "This job was automatically triggered by a ${{ github.event_name }} event."
-
-      - name: 🐧 Run on ${{ runner.os }}
-        run: echo "This job is running on a ${{ runner.os }} server hosted by GitHub!"
-
-      - name: 🔎 Branch and Repository Information
-        run: |
-          echo "The name of your branch is ${{ github.ref }}"
-          echo "Your repository is ${{ github.repository }}"
-
-      - name: 🛠️ Check out repository code
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: 🐘 Setup PHP
+      - name: Setup PHP
         id: setup-php
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          extensions: intl # Add any necessary PHP extensions
+          tools: laravel/pint, overtrue/phplint
 
-      - name: 🚨 Check PHP Linting
-        run: php -l .
-
-      - name: 🚦 Check Code Style
-        run: vendor/bin/phpcs
+      - name: Check PHP syntax
+        run: phplint --exclude=*.log .
+      - name: check code style
+        run: pint --test
