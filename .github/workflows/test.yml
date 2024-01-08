@@ -40,7 +40,4 @@ jobs:
       - name: Run Test
         run: vendor/bin/phpunit
 
-        - name: Run Test
-        run: vendor/bin/phpunit
-
 
