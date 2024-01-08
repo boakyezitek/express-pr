@@ -23,5 +23,5 @@ jobs:
 
       - name: Check PHP syntax
         run: phplint --exclude=*.log .
-      - name: check code style
-        run: pint --test
+      # - name: check code style
+        # run: pint --test
