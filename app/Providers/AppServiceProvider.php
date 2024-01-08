@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Property;
 use App\Models\Staff;
 use App\Models\Tenant;
+use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();
 
         Relation::enforceMorphMap([
+            'user' => User::class,
             'staff' => Staff::class,
             'tenant' => Tenant::class,
             'client' => Client::class,
