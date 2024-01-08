@@ -17,8 +17,7 @@ jobs:
         with:
           php-version: '8.1'
 
-      - name: Print PHP version
-        run: echo ${{ steps.setup-php.outputs.php-version }}
-
-      - name: Output PHP version
-        run: php -v
+      - uses: overtrue/phplint@8.1
+        with:
+          path: .
+          options: --exclude=*.log
