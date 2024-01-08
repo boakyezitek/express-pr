@@ -1,0 +1,46 @@
+name: Express PR Test
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
+on:
+  push:
+
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['8.1']
+
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        id: setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: laravel/pint, overtrue/phplint
+
+      - name: Check PHP syntax
+        run: phplint --exclude=*.log .
+
+      # - name: Check code style
+        # run: pint --test
+
+      - name: Install Composer dependencies
+        env:
+          COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+        run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Run Test
+        run: vendor/bin/phpunit
+
+        - name: Run Test
+        run: vendor/bin/phpunit
+
+
