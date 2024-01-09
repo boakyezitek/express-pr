@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TenantController;
+use App\Http\Controllers\VendorController;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,3 +39,9 @@ Route::get('/tenants/{tenant}', [TenantController::class, 'show'])->middleware([
 Route::post('/tenants', [TenantController::class, 'create'])->middleware(['auth:sanctum']);
 Route::put('/tenants/{tenant}', [TenantController::class, 'update'])->middleware(['auth:sanctum']);
 Route::delete('/tenants/{tenant}', [TenantController::class, 'destroy'])->middleware(['auth:sanctum']);
+
+Route::get('/vendors', [VendorController::class, 'index'])->middleware(['auth:sanctum']);
+Route::get('/vendors/{vendor}', [VendorController::class, 'show'])->middleware(['auth:sanctum']);
+Route::post('/vendors', [VendorController::class, 'create'])->middleware(['auth:sanctum']);
+Route::put('/vendors/{vendor}', [VendorController::class, 'update'])->middleware(['auth:sanctum']);
+Route::delete('/vendors/{vendor}', [VendorController::class, 'destroy'])->middleware(['auth:sanctum']);
