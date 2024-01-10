@@ -68,11 +68,21 @@ class Expense extends Model
         return $this->morphMany(Document::class, 'resource');
     }
 
-    public function expensesCategory():HasOne
+    /**
+     * Define a one-to-one relationship with the ExpensesCategory model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function expensesCategory(): HasOne
     {
         return $this->hasOne(ExpensesCategory::class, 'id');
     }
 
+    /**
+     * Define a many-to-one (inverse of one-to-many) relationship with the Property model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function property(): BelongsTo
     {
         return $this->belongsTo(Property::class, 'property_id');

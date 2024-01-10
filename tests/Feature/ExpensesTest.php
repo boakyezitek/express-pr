@@ -40,13 +40,25 @@ class ExpensesTest extends TestCase
         $vendor = Vendor::factory()->create(['user_id' => $paid_to_user->id]);
 
 
-        Expense::factory(5)->create([
+        Expense::factory(4)->create([
             'paid_to' => $vendor->id,
             'paid_by' => $paidstaff->id,
             'property_id' => $property->id,
             'expenses_category_id' => 1,
             'created_by' => $staff->id,
         ]);
+
+        $expenses = Expense::factory()->create([
+            'paid_to' => $vendor->id,
+            'paid_by' => $paidstaff->id,
+            'property_id' => $property->id,
+            'expenses_category_id' => 1,
+            'created_by' => $staff->id,
+        ]);
+
+        $images = $expenses->proofOfPayment()->create(
+            ['path' => 'proofofpayment.png'],
+        );
 
         $response = $this->get('/api/expenses');
 
@@ -151,7 +163,7 @@ class ExpensesTest extends TestCase
 
         ]);
 
-        $response = $this->get('/api/expenses?property_id='.$property_2->id);
+        $response = $this->get('/api/expenses?property_id=' . $property_2->id);
 
         $response->assertOk()
             ->assertJsonStructure(['data' => [['id']]])
@@ -206,7 +218,7 @@ class ExpensesTest extends TestCase
 
         ]);
 
-        $response = $this->get('/api/expenses?paid_by='.$paidstaff2->id);
+        $response = $this->get('/api/expenses?paid_by=' . $paidstaff2->id);
 
         $response->assertOk()
             ->assertJsonStructure(['data' => [['id']]])
@@ -260,7 +272,7 @@ class ExpensesTest extends TestCase
 
         ]);
 
-        $response = $this->get('/api/expenses?paid_to='.$vendor2->id);
+        $response = $this->get('/api/expenses?paid_to=' . $vendor2->id);
 
         $response->assertOk()
             ->assertJsonStructure(['data' => [['id']]])
@@ -307,14 +319,12 @@ class ExpensesTest extends TestCase
         ]);
 
         $response->assertCreated()
-        ->assertJsonPath('data.date_paid', '2023-12-10')
-        ->assertJsonPath('data.expense_amount', 25)
-        ->assertJsonPath('data.is_reimbursement_necessary', 2)
-        ->assertJsonPath('data.reimbursement_date', '2024-01-15')
-        ->assertJsonPath('data.paid_to.id', $vendor->id)
-        ->assertJsonPath('data.property_id', $property->id);
-
-
+            ->assertJsonPath('data.date_paid', '2023-12-10')
+            ->assertJsonPath('data.expense_amount', 25)
+            ->assertJsonPath('data.is_reimbursement_necessary', 2)
+            ->assertJsonPath('data.reimbursement_date', '2024-01-15')
+            ->assertJsonPath('data.paid_to.id', $vendor->id)
+            ->assertJsonPath('data.property_id', $property->id);
     }
 
     public function test_application_can_update_expenses(): void
@@ -346,7 +356,7 @@ class ExpensesTest extends TestCase
             'created_by' => $staff->id,
         ]);
 
-        $response = $this->putJson('/api/expenses/'.$expenses->id, [
+        $response = $this->putJson('/api/expenses/' . $expenses->id, [
             "date_paid" => "2023-12-10",
             "description" => "Alias laboriosam laborum suscipit sunt voluptatum. Harum at vel tenetur commodi veniam eligendi. Ipsa ipsam eius alias numquam. Natus voluptatem quae expedita earum modi enim.",
             "expense_amount" => 25,
@@ -357,10 +367,10 @@ class ExpensesTest extends TestCase
         ]);
 
         $response->assertOk()
-        ->assertJsonPath('data.date_paid', '2023-12-10')
-        ->assertJsonPath('data.expense_amount', 25)
-        ->assertJsonPath('data.is_reimbursement_necessary', 2)
-        ->assertJsonPath('data.reimbursement_date', '2024-01-15');
+            ->assertJsonPath('data.date_paid', '2023-12-10')
+            ->assertJsonPath('data.expense_amount', 25)
+            ->assertJsonPath('data.is_reimbursement_necessary', 2)
+            ->assertJsonPath('data.reimbursement_date', '2024-01-15');
     }
 
     public function test_application_can_delete_expenses(): void
@@ -394,11 +404,11 @@ class ExpensesTest extends TestCase
             'created_by' => $staff->id,
         ]);
 
-        $images= $expenses->proofOfPayment()->create(
+        $images = $expenses->proofOfPayment()->create(
             ['path' => 'proofofpayment.png'],
         );
 
-        $response = $this->deleteJson('/api/expenses/'.$expenses->id);
+        $response = $this->deleteJson('/api/expenses/' . $expenses->id);
 
         $response->assertOk();
 
