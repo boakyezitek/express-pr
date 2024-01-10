@@ -1,6 +1,4 @@
 name: Express PR Test
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-
 on:
   push:
 
