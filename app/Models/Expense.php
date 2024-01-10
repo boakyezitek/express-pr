@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Expenese extends Model
+class Expense extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -66,4 +67,25 @@ class Expenese extends Model
     {
         return $this->morphMany(Document::class, 'resource');
     }
+
+    /**
+     * Define a one-to-one relationship with the ExpensesCategory model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function expensesCategory(): HasOne
+    {
+        return $this->hasOne(ExpensesCategory::class, 'id');
+    }
+
+    /**
+     * Define a many-to-one (inverse of one-to-many) relationship with the Property model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function property(): BelongsTo
+    {
+        return $this->belongsTo(Property::class, 'property_id');
+    }
+
 }
