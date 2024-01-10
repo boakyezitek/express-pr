@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\VendorController;
@@ -45,3 +46,10 @@ Route::get('/vendors/{vendor}', [VendorController::class, 'show'])->middleware([
 Route::post('/vendors', [VendorController::class, 'create'])->middleware(['auth:sanctum']);
 Route::put('/vendors/{vendor}', [VendorController::class, 'update'])->middleware(['auth:sanctum']);
 Route::delete('/vendors/{vendor}', [VendorController::class, 'destroy'])->middleware(['auth:sanctum']);
+
+
+Route::get('/properties', [PropertyController::class, 'index']);
+Route::get('/properties/{property}', [PropertyController::class, 'show'])->middleware(['auth:sanctum']);
+Route::post('/properties', [PropertyController::class, 'create'])->middleware(['auth:sanctum']);
+Route::put('/properties/{property}', [PropertyController::class, 'update'])->middleware(['auth:sanctum']);
+Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->middleware(['auth:sanctum']);

@@ -83,7 +83,7 @@ class Property extends Model
      */
     public function propertyAmenity(): BelongsToMany
     {
-        return $this->belongsToMany(AmenityItem::class, 'amenity_item_id');
+        return $this->belongsToMany(AmenityItem::class, 'property_amenity');
     }
 
     /**
@@ -93,7 +93,7 @@ class Property extends Model
      */
     public function propertyUtilityIncluded(): BelongsToMany
     {
-        return $this->belongsToMany(UtilityItem::class, 'utility_item_id');
+        return $this->belongsToMany(UtilityItem::class, 'property_utility_included');
     }
 
     /**
@@ -101,9 +101,9 @@ class Property extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function propertyType(): BelongsTo
+    public function propertyType(): BelongsToMany
     {
-        return $this->belongsTo(PropertyTypeItem::class, 'property_type_item_id');
+        return $this->belongsToMany(PropertyTypeItem::class, 'property_type');
     }
 
     /**
@@ -113,7 +113,7 @@ class Property extends Model
      */
     public function propertyParkingType(): BelongsToMany
     {
-        return $this->belongsToMany(ParkingItem::class, 'parking_item_id');
+        return $this->belongsToMany(ParkingItem::class, 'property_parking_type');
     }
 
     /**
