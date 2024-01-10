@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use App\Http\Resources\PropertyResource;
-use App\Models\Validators\PropertyValidator;
+use App\Models\AppValidator\PropertyValidator;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
