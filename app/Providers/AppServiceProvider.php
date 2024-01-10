@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Client;
+use App\Models\Expense;
+use App\Models\Payment;
 use App\Models\Property;
 use App\Models\Staff;
 use App\Models\Tenant;
@@ -36,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
             'client' => Client::class,
             'vendor' => Vendor::class,
             'property' => Property::class,
+            'expenses' => Expense::class,
+            'payment' => Payment::class,
         ]);
     }
 }

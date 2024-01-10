@@ -181,11 +181,13 @@ class PropertyController extends Controller
 
         $this->removeRelatedModels($property);
 
-        $property->images()->each(function ($image) {
-            Storage::delete($image->path);
+        if($property->images()) {
+            $property->images()->each(function ($image) {
+                Storage::delete($image->path);
 
-            $image->delete();
-        });
+                $image->delete();
+            });
+        }
 
         $property->delete();
     }
