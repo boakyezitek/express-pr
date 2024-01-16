@@ -14,4 +14,9 @@ class FormOfPayment extends Model
      */
     const PHYSICAL = 1;
     const ELECTRONIC = 2;
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
+    }
 }

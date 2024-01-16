@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ExpensesController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TenantController;
@@ -60,4 +61,10 @@ Route::get('/expenses/{expense}', [ExpensesController::class, 'show'])->middlewa
 Route::post('/expenses', [ExpensesController::class, 'create'])->middleware(['auth:sanctum']);
 Route::put('/expenses/{expense}', [ExpensesController::class, 'update'])->middleware(['auth:sanctum']);
 Route::delete('/expenses/{expense}', [ExpensesController::class, 'destroy'])->middleware(['auth:sanctum']);
+
+Route::get('/payments', [PaymentController::class, 'index'])->middleware(['auth:sanctum']);
+Route::get('/payments/{payment}', [PaymentController::class, 'show'])->middleware(['auth:sanctum']);
+Route::post('/payments', [PaymentController::class, 'create'])->middleware(['auth:sanctum']);
+Route::put('/payments/{payment}', [PaymentController::class, 'update'])->middleware(['auth:sanctum']);
+Route::delete('/payments/{payment}', [PaymentController::class, 'destroy'])->middleware(['auth:sanctum']);
 

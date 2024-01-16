@@ -14,6 +14,9 @@ class Payment extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public const DEPOSITED_BY_STAFF = 'staff';
+    public const DEPOSITED_BY_TENANT = 'tenant';
+
     /**
      * Define how certain attributes are cast when retrieved from the database.
      * In this case, cast 'payment_amount' attribute to an integer.
@@ -69,7 +72,7 @@ class Payment extends Model
      */
     public function formOfPayment(): HasOne
     {
-        return $this->hasOne(FormOfPayment::class);
+        return $this->hasOne(FormOfPayment::class, 'id');
     }
 
     /**
@@ -87,8 +90,8 @@ class Payment extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function DepositeBy(): MorphTo
+    public function depositable(): MorphTo
     {
-        return $this->morphTo('deposite_by');
+        return $this->morphTo();
     }
 }

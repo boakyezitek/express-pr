@@ -47,4 +47,14 @@ class Staff extends Model
     {
         return $this->morphOne(Image::class, 'image');
     }
+
+    /**
+     * Define a MorphOne relationship with the payment model for the depositedBy associated with the staff.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function payment(): MorphOne
+    {
+        return $this->morphOne(Payment::class, 'depositable');
+    }
 }

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreignId('created_by')->constrained('staff');
             $table->foreignId('form_of_payment_id')->index();
             $table->date('payment_received')->nullable();
+            $table->morphs('depositable');
             $table->softDeletes();
             $table->timestamps();
         });
